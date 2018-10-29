@@ -1,0 +1,40 @@
+server:
+  port: 8701
+spring:
+  application:
+    name: configCenter
+  profiles:
+    active: prod #如果配置文件放在在本地，则必须配置项必须在application.yml中，关键字必须为native，以下为配置本地方式，如需要切换到配置文件读取git则只需要修改 active: prod 即可
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        hostname: 127.0.0.1
+        healthCheckUrl: http://${spring.cloud.consul.discovery.hostname}:${server.port}/health
+        healthCheckInterval: 5s
+    config:
+      server:
+        native:
+          #searchLocations: D:/SpringCloud  绝对路径
+          searchLocations: classpath:/config   #相对路径
+
+  # 访问说明：
+  #  /{application}/{profile}[/{label}]
+  #eg:
+  #  http://10.200.110.32:8701/configCenter/master
+  # http://10.200.110.32:8701/configCenter/prod/master
+  # http://10.200.110.32:8701/configCenter/test/master
+
+  # /{application}-{profile}.yml
+  #eg:
+  #http://10.200.110.32:8701/configCenter-*.yml --避免使用
+  #http://10.200.110.32:8701/configCenter-prod.yml
+  # http://10.200.110.32:8701/configCenter-test.yml
+
+  #/{label}/{application}-{profile}.yml
+  #eg:
+  # http://10.200.110.32:8701/master/configCenter-*.yml --避免使用
+  #http://10.200.110.32:8701/master/configCenter-prod.yml
+# http://10.200.110.32:8701/master/configCenter-test.yml
+##
