@@ -1,0 +1,71 @@
+buildscript {
+    ext.spring_boot_version = '1.5.10.RELEASE'
+    repositories {
+        maven { url 'https://repo.spring.io/release/' }
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:$spring_boot_version"
+    }
+}
+
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'application'
+
+
+configurations.all {
+    // check for updates every build 缓存刷新
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url 'http://127.0.0.1:8081/repository/maven-public/'}
+    mavenCentral()
+    jcenter()
+}
+
+jar {
+    baseName = 'config-center'
+    version = '1.0'
+}
+mainClassName = 'com.ConsumerApplication'
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-dependencies:Edgware.SR3' // 切记，如果配成Dalston.RELEASE，则/health 则{"status"："down"}
+    }
+}
+
+dependencies {
+
+    //负载均衡、熔断
+    compile 'org.springframework.cloud:spring-cloud-starter-feign'
+    compile 'org.springframework.cloud:spring-cloud-starter-hystrix:1.4.5.RELEASE'
+
+    //consul注册中心
+    compile 'org.springframework.cloud:spring-cloud-starter-consul-discovery'
+    compile 'org.springframework.cloud:spring-cloud-dependencies:Dalston.RELEASE'
+
+    //json
+    compile 'com.alibaba:fastjson:1.2.34'
+
+    //配置中心
+    compile 'org.springframework.cloud:spring-cloud-starter-config'
+    compile 'org.springframework.cloud:spring-cloud-config-server'
+
+    //一个监控和管理生产环境(健康监测/health)
+    compile 'org.springframework.boot:spring-boot-actuator'
+
+    //web访问
+    compile 'org.springframework.boot:spring-boot-starter-web'
+
+    //测试maven私服中心nexus
+    compile 'com.pyx:springCloudUtil:2.0-SNAPSHOT'  
+
+
+}

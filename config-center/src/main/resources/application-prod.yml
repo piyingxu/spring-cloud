@@ -1,0 +1,36 @@
+spring:
+  cloud:
+    consul:
+      host: 127.0.0.1
+      port: 8500
+      discovery:
+        hostname: 127.0.0.1
+        #如果重写了/health则需要配置下面
+        #healthCheckUrl: http://${spring.cloud.consul.discovery.hostname}:${server.port}/health
+        #healthCheckInterval: 5s
+    config:
+       server:
+         git:
+           uri: https://github.com/piyingxu/config-resource/
+             #searchPaths: /** 在根目录下所有目录下查找
+             #searchPaths: /src/main/resources* 在指定目录下查找
+           searchPaths: /**
+# 访问说明
+#  /{application}/{profile}[/{label}]
+  #eg:
+  #  http://10.200.110.32:8701/configCenter/master
+  # http://10.200.110.32:8701/configCenter/prod/master
+  # http://10.200.110.32:8701/configCenter/test/master
+
+  # /{application}-{profile}.yml
+  #eg:
+  #http://10.200.110.32:8701/configCenter-*.yml --避免使用
+  #http://10.200.110.32:8701/configCenter-prod.yml
+  # http://10.200.110.32:8701/configCenter-test.yml
+
+#/{label}/{application}-{profile}.yml
+  #eg:
+  # http://10.200.110.32:8701/master/configCenter-*.yml --避免使用
+  #http://10.200.110.32:8701/master/configCenter-prod.yml
+# http://10.200.110.32:8701/master/configCenter-test.yml
+##
