@@ -21,6 +21,13 @@
                 <checksumPolicy>warn</checksumPolicy>
             </snapshots>
         </repository>
+
+        <repository>
+            <id>aliyun-repository</id>
+            <name>aliyun repository</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+
     </repositories>
     <!--定义releases库的nexus地址-->
     <distributionManagement>
@@ -30,6 +37,32 @@
             <url>http://127.0.0.1:8081/repository/pyx-spring-cloud-snapshot/</url>
         </repository>
     </distributionManagement>
+
+    <properties>
+        <spring.framework.version>1.5.10.RELEASE</spring.framework.version>
+        <io.springfox.version>2.6.0</io.springfox.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <version>${spring.framework.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>${io.springfox.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>${io.springfox.version}</version>
+        </dependency>
+
+    </dependencies>
 
 
 </project>
