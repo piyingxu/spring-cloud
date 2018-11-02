@@ -14,3 +14,10 @@ spring:
       port: 8500
       discovery:
         hostname: 127.0.0.1 # 本机ip
+
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 30000
+spring.cloud.loadbalancer.retry.enabled: true
+ribbon.ReadTimeout: 3000
+ribbon.ConnectTimeout: 30000
+hystrix.threadpool.default.coreSize: 200
+hystrix.threadpool.default.maximumSize: 200
