@@ -1,5 +1,5 @@
 server:
-  port: 8701
+  port: 8888
 spring:
   application:
     name: configCenter
@@ -19,7 +19,7 @@ spring:
           #searchLocations: D:/SpringCloud  绝对路径
           searchLocations: classpath:/config   #相对路径
 
-  # 访问说明：
+  # 访问说明： 其他微服务连到配置中心的时候，会默认读取配置目录下的application.yml，总务公共配置服务
   #  /{application}/{profile}[/{label}]
   #eg:
   #  http://10.200.110.32:8701/configCenter/master
@@ -38,3 +38,13 @@ spring:
   #http://10.200.110.32:8701/master/configCenter-prod.yml
 # http://10.200.110.32:8701/master/configCenter-test.yml
 ##
+
+spring.rabbitmq.host: 127.0.0.1
+spring.rabbitmq.port: 5672
+spring.rabbitmq.username: piyingxu
+spring.rabbitmq.password: 123456
+spring.rabbitmq.virtual-host: /java/mq
+
+spring.rabbitmq.listener.simple.acknowledge-mode: manual  #AcknowledgeMode 除了 NONE 和 MANUAL(手动) 之外还有 AUTO
+
+management.security.enabled: false #访问监控需要授权，关闭安全验证 /bus/refresh

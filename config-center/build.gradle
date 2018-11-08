@@ -22,6 +22,11 @@ configurations.all {
     resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
 }
 
+configurations {
+    //排除依赖--使用undertow
+    compile.exclude module: "spring-boot-starter-tomcat"
+}
+
 repositories {
     maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
     maven { url 'http://127.0.0.1:8081/repository/maven-public/'}
@@ -65,7 +70,12 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
 
     //测试maven私服中心nexus
-    compile 'com.pyx:springCloudUtil:2.0-SNAPSHOT'  
+    compile 'com.pyx:springCloudUtil:2.0-SNAPSHOT'
 
+    //undertow容器
+    compile 'org.springframework.boot:spring-boot-starter-undertow'
+
+    //注册到消息总线（会默认增加 /bus/refresh 访问请求, 另外读取配置类需要@RefreshScope）
+    compile 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
 
 }
