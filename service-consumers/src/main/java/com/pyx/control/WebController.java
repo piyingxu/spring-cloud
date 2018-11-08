@@ -1,5 +1,6 @@
 package com.pyx.control;
 
+import com.pyx.service.RabbitSender;
 import com.pyx.service.TradeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,11 +21,21 @@ public class WebController {
 	@Autowired
 	private TradeService tradeService;
 
+    @Autowired
+    private RabbitSender rabbitSender;
+
     @ApiOperation("1、获取配置文件")
-	@RequestMapping(value = "/getConfig", method = RequestMethod.POST)
+	@RequestMapping(value = "/getInfo", method = RequestMethod.GET)
 	public String getConfig(@RequestParam("name") String name) {
 		return tradeService.getConfigInfo(name);
 	}
+
+    @ApiOperation("2、rabbit发送消息")
+    @RequestMapping(value = "/sendMsg", method = RequestMethod.GET)
+    public String sendMsg(@RequestParam("msg") String msg) {
+        rabbitSender.send(msg);
+        return "success";
+    }
 
 
 

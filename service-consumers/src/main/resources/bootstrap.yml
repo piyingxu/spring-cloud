@@ -21,3 +21,13 @@ ribbon.ReadTimeout: 3000
 ribbon.ConnectTimeout: 30000
 hystrix.threadpool.default.coreSize: 200
 hystrix.threadpool.default.maximumSize: 200
+
+spring.rabbitmq.host: 127.0.0.1
+spring.rabbitmq.port: 5672
+spring.rabbitmq.username: piyingxu
+spring.rabbitmq.password: 123456
+spring.rabbitmq.virtual-host: /java/mq
+spring.rabbitmq.publisher-confirms: true #消息发送是否需要发送确认发送成功
+spring.rabbitmq.publisher-returns: true #如果消息失败的回调
+spring.rabbitmq.listener.simple.acknowledge-mode: manual  #AcknowledgeMode 除了 NONE 和 MANUAL(手动) 之外还有 AUTO
+
