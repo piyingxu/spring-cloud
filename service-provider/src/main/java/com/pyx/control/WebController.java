@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+
 @Api(description = "控制器", tags = "TEST")
 @RestController
 public class WebController {
@@ -23,9 +24,11 @@ public class WebController {
     @ApiOperation("1、获取配置文件")
 	@RequestMapping(value = "/getConfig", method = RequestMethod.GET)
 	public String health(String name) {
-	    String configInfo = "hellow " + name + "----" + config.getName() + "---" + config.getAge() + "----" + config.getAddress() + "----" + ServiceInfoUtil.getPort();
+        String configInfo = "hellow " + name + "----" + config.getName() + "---" + config.getAge() + "----" + config.getAddress() + "----" + ServiceInfoUtil.getPort();
 		return configInfo;
 	}
+
+
 
 
 

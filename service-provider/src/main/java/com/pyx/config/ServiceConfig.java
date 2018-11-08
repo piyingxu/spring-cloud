@@ -1,6 +1,7 @@
 package com.pyx.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
  * @date: 2018/10/31 11:18
  */
 @Configuration
+@RefreshScope //动态刷新，如果想要动态刷新必须配置
 public class ServiceConfig {
 
     @Value("${test.address.city}")

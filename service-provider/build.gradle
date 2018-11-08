@@ -64,6 +64,13 @@ dependencies {
 
     //测试maven私服中心nexus
     compile 'com.pyx:springCloudUtil:2.0-SNAPSHOT'
-    
+
+    //消息中间件
+    compile 'org.springframework.boot:spring-boot-starter-amqp'
+
+    //注册到消息总线（会默认增加 /bus/refresh 访问请求, 另外读取配置类需要@RefreshScope）
+    compile 'org.springframework.cloud:spring-cloud-starter-bus-amqp'
+
+
 }
 

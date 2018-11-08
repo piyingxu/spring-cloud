@@ -14,3 +14,11 @@ spring:
       port: 8500
       discovery:
         hostname: 127.0.0.1 # 本机ip
+
+spring.rabbitmq.host: 127.0.0.1
+spring.rabbitmq.port: 5672
+spring.rabbitmq.username: piyingxu
+spring.rabbitmq.password: 123456
+spring.rabbitmq.virtual-host: /java/mq
+
+spring.rabbitmq.listener.simple.acknowledge-mode: manual  #AcknowledgeMode 除了 NONE 和 MANUAL(手动) 之外还有 AUTO
